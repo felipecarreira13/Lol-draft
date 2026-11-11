@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a0b0e">
+  <meta name="description" content="Draft competitivo de League of Legends com salas para capitães e espectadores.">
+  <title>Draft Rift — Arena de draft</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" type="module"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/" aria-label="Draft Rift, início"><span class="brand-mark" aria-hidden="true">◇</span><span>Draft<span class="brand-accent">Rift</span><small>LEAGUE OF LEGENDS</small></span></a>
+      <nav class="nav" id="roomNav" aria-label="Principal" hidden><a class="nav-active" href="#arena">Arena</a><a id="navCatalog" href="#catalog">Campeões</a></nav>
+      <div class="top-actions"><span class="connection" id="connection" hidden>Carregando</span><button class="button secondary" id="linksButton" hidden>↗ Convites</button></div>
+    </div>
+  </header>
+  <main id="arena" class="shell">
+    <div id="notice" class="notice" role="status" hidden></div>
+    <section id="home" class="home-panel" aria-labelledby="homeTitle" hidden>
+      <h1 id="homeTitle">Draft de <em>League of Legends</em></h1>
+      <div class="home-actions"><button class="button primary" id="newRoom" disabled>＋ Criar sala</button><a class="button secondary" id="resumeRoom" hidden>Voltar à minha sala</a></div>
+    </section>
+    <div id="roomContent" hidden>
+      <div class="page-heading">
+        <div><div class="breadcrumb"><span>COMPETITIVO</span><span class="slash">/</span><span id="crumb">SALA DE DRAFT</span></div><h1 id="pageTitle">Sala de <em>draft</em></h1></div>
+        <div class="meta" id="roomMeta"></div>
+      </div>
+      <section class="board" id="board" aria-label="Tabuleiro de draft">
+        <div class="side blue" id="blueSide"></div>
+        <div class="center">
+          <div id="phase"></div>
+          <div id="hero" class="hero"></div>
+          <section class="catalog" id="catalog" hidden aria-labelledby="catalogTitle">
+            <div class="catalog-header">
+              <div><div class="eyebrow">POOL DE CAMPEÕES</div><h2 id="catalogTitle">Campeões <span id="resultCount"></span></h2></div>
+              <label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Pesquisar campeão" aria-label="Pesquisar campeão" autocomplete="off"></label>
+            </div>
+            <div class="catalog-tools"><div class="filters" id="filters" aria-label="Filtrar por rota"></div><label class="only"><input id="only" type="checkbox"> Só disponíveis</label></div>
+            <div class="roster" id="roster"></div>
+            <div class="selection" id="selection" hidden></div>
+          </section>
+        </div>
+        <div class="side red" id="redSide"></div>
+      </section>
+      <div id="ownerControls" class="control-bar" hidden></div>
+      <div id="lockedBar" class="locked-bar" hidden></div>
+      <footer><span>Draft Rift</span><span>Projeto de fãs com imagens da Riot Games.</span><span id="patch"></span></footer>
+    </div>
+  </main>
+  <dialog id="setup">
+    <form id="setupForm">
+      <div class="dialog-heading"><div><div class="eyebrow">ORGANIZADOR</div><h2>Criar sala</h2></div><button class="icon close" type="button" aria-label="Fechar">×</button></div>
+      <div class="form-row">
+        <label>Time 1<input id="team1" name="team1" maxlength="28" placeholder="Time 1"></label>
+        <label>Time 2<input id="team2" name="team2" maxlength="28" placeholder="Time 2"></label>
+      </div>
+      <fieldset><legend>Formato de draft</legend><div class="format-options">
+        <label><input type="radio" name="mode" value="standard" checked><span><b>Padrão</b><small>Bloqueios valem para o jogo atual.</small></span></label>
+        <label><input type="radio" name="mode" value="fearless"><span><b>Fearless</b><small>Picks anteriores ficam bloqueados para os dois times.</small></span></label>
+        <label><input type="radio" name="mode" value="ironman"><span><b>Ironman</b><small>Picks e bans anteriores ficam bloqueados para os dois times.</small></span></label>
+      </div></fieldset>
+      <div class="form-row three">
+        <label>Jogo ou série<select name="games" id="games"><option value="1">Jogo único</option><option value="3">MD3</option><option value="5">MD5</option></select></label>
+        <label>Tempo por turno (s)<input name="seconds" type="number" required min="10" max="180" value="30"></label>
+        <label>Lado azul<select name="blue" id="blueSelect"><option value="1">Time 1</option><option value="2">Time 2</option></select></label>
+      </div>
+      <p class="form-error" id="formError" role="alert" hidden></p>
+      <button type="submit" class="button primary wide">Criar sala e gerar convites <span aria-hidden="true">↗</span></button>
+    </form>
+  </dialog>
+  <dialog id="links">
+    <div class="dialog-heading"><div><div class="eyebrow">ACESSO À SALA</div><h2>Convites</h2></div><button class="icon close" type="button" aria-label="Fechar">×</button></div>
+    <div id="linkRows"></div>
+    <p id="copyStatus" class="hint" role="status"></p>
+  </dialog>
+  <dialog id="claim">
+    <form id="claimForm">
+      <div class="dialog-heading"><div><div class="eyebrow">CONVITE DE CAPITÃO</div><h2>Escolher time</h2></div></div>
+      <label>Qual time você representa?<select id="claimTeam" required></select></label>
+      <p id="claimError" class="form-error" role="alert" hidden></p>
+      <button class="button primary wide" type="submit">Entrar como capitão</button>
+    </form>
+  </dialog>
+</body>
+</html>

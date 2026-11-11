@@ -1,0 +1,10 @@
+CREATE TABLE rooms (
+  id TEXT PRIMARY KEY,
+  owner TEXT NOT NULL,
+  team1 TEXT NOT NULL,
+  team2 TEXT NOT NULL,
+  spectator TEXT NOT NULL,
+  version INTEGER NOT NULL DEFAULT 0,
+  state TEXT NOT NULL
+);
+
