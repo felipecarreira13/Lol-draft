@@ -1,4 +1,4 @@
-name = "draft-rift"
+name = "lol-draft"
 main = "dist/server/index.js"
 compatibility_date = "2026-11-10"
 workers_dev = true
