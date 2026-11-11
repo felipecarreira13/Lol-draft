@@ -30,6 +30,12 @@ Para publicar uma atualização, gere o Worker e rode npx wrangler deploy de nov
 
 Referências oficiais: https://developers.cloudflare.com/d1/get-started/ e https://developers.cloudflare.com/workers/configuration/routing/workers-dev/
 
+### Deploy pelo GitHub na Cloudflare
+
+Nas configurações de build do Worker, use `npm run build` como comando de build e `npx wrangler deploy` como comando de deploy. O `wrangler.toml` também configura o build para execuções diretas do Wrangler.
+
+Antes do primeiro deploy, crie o banco D1, preencha o `database_id` no `wrangler.toml` e execute `npx wrangler d1 migrations apply DB --remote`, conforme os passos acima.
+
 ## Rodar no seu computador
 
 Abra um terminal nessa pasta, rode npm start e acesse http://127.0.0.1:4173. As salas locais são salvas em rooms.sqlite.
